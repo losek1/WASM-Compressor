@@ -26,14 +26,15 @@ def compress(path_with_file):
         with open(file, "rb") as data:
             bytes_from_file: bytes = data.read()
         compressed_bytes: bytes = brotli.compress(bytes_from_file)
-
         with open(os.path.splitext(os.path.basename(file))[0] + ".br", "wb") as data:
             data.write(compressed_bytes)
         file_label.configure(text="Done")
+        os.system(r'explorer /select,%s' % (path_with_file.replace(os.path.basename(path_with_file), "") + os.path.splitext(os.path.basename(file))[0] + ".br").replace('/', '\\'))
     except Exception as e:
         file_label.configure(text="Err: " + str(e))
     progress_bar.stop()
     winsound.PlaySound("SystemExclamation", winsound.SND_ALIAS)
+
 
 
 def add_file():
