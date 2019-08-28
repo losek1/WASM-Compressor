@@ -8,7 +8,6 @@ import brotli
 import threading
 import winsound
 
-
 root = Tk()
 root.geometry("380x70")
 root.resizable(width=FALSE, height=FALSE)
@@ -29,12 +28,12 @@ def compress(path_with_file):
         with open(os.path.splitext(os.path.basename(file))[0] + ".br", "wb") as data:
             data.write(compressed_bytes)
         file_label.configure(text="Done")
-        os.system(r'explorer /select,%s' % (path_with_file.replace(os.path.basename(path_with_file), "") + os.path.splitext(os.path.basename(file))[0] + ".br").replace('/', '\\'))
+        os.system(r'explorer /select,' + (path_with_file.replace(os.path.basename(path_with_file), "") + os.path.splitext(os.path.basename(file))[0] + ".br").replace('/', '\\'))
     except Exception as e:
         file_label.configure(text="Err: " + str(e))
     progress_bar.stop()
     winsound.PlaySound("SystemExclamation", winsound.SND_ALIAS)
-
+    file_label.configure(text="Add file to start")
 
 
 def add_file():
@@ -43,7 +42,7 @@ def add_file():
                                 title="Choose a wasm file.")
     if file:
         file_label.configure(text="Compressing: " + os.path.basename(file))
-        progress_bar.start(6)
+        progress_bar.start(4)
         compress_file: ClassVar = threading.Thread(target=compress, args=(file,))
         compress_file.daemon = True
         compress_file.start()
@@ -64,7 +63,7 @@ file_label.place(relx=0.2, rely=0.3, relwidth=0.8, relheight=0.4)
 
 progress_bar: ClassVar = ttk.Progressbar(root, orient=HORIZONTAL, mode="indeterminate"
                                          , style="G.Horizontal.TProgressbar")
-progress_bar.place(relx=0.2, rely=0.9, relwidth=0.8, height=10)
+progress_bar.place(relx=0.2, rely=0.9, relwidth=0.8, relheight=0.14)
 
 root.after(5000, lambda: root.focus_force())
 root.protocol("WM_DELETE_WINDOW", lambda: sys.exit(0))
