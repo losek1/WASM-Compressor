@@ -21,4 +21,4 @@ Main programmer, designer: Mateusz Perczak
 
 
 ## Some pictures of application
-![Picture of playing music in application]()
+![Picture of playing music in application](https://github.com/losek1/WASM-Compressor/blob/v1.0.1/img/app.PNG)
