@@ -1,6 +1,8 @@
 # WASM-Compressor
 Python wasm compressor
 
+## Icons
+https://icons8.com/
 
 ## Authors
 Main programmer, designer: Mateusz Perczak
